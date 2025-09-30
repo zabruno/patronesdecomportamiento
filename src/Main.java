@@ -1,5 +1,9 @@
 import ChainOfResp.*;
 import Command.*;
+import Iterator.*;
+
+import java.util.List;
+import java.util.Set;
 
 public class Main {
     public static void main(String[] args) {
@@ -23,13 +27,13 @@ public class Main {
         Alumno bruno = new Alumno(123, "Bruno");
         Alumno candela = new Alumno(456, "Candela");
         // Crear comandos
-        Command inscribirMatematica = new InscribirseCommand();
-        Command abandonarFisica = new AbandonarCommand();
-        Command solicitarCertificado = new CertificadoCommand();
+        Command inscribir = new InscribirseCommand();
+        Command abandonar = new AbandonarCommand();
+        Command certificado = new CertificadoCommand();
         // Crear invokers para cada alumno
-        AlumnoCommand brunoInvoker = new AlumnoCommand(inscribirMatematica);
+        AlumnoCommand brunoInvoker = new AlumnoCommand(inscribir);
         bruno.setAlumnoCommand(brunoInvoker);
-        AlumnoCommand candelaInvoker = new AlumnoCommand(abandonarFisica);
+        AlumnoCommand candelaInvoker = new AlumnoCommand(abandonar);
         candela.setAlumnoCommand(candelaInvoker);
         // --- Bruno se inscribe en Matemáticas ---
         bruno.getAlumnoCommand().pressButton(matematicas, bruno);  // Ejecuta Inscribirse
@@ -39,12 +43,21 @@ public class Main {
         candela.getAlumnoCommand().pressButton(fisica, candela);    // Ejecuta Abandonar
         candela.getAlumnoCommand().unpressButton(fisica, candela);  // Undo: Candela se reinscribe en Física
         // --- Bruno solicita certificado de Matemáticas ---
-        AlumnoCommand certificadoInvoker = new AlumnoCommand(solicitarCertificado);
+        AlumnoCommand certificadoInvoker = new AlumnoCommand(certificado);
         bruno.setAlumnoCommand(certificadoInvoker);
         bruno.getAlumnoCommand().pressButton(matematicas, bruno);   // Genera certificado
         bruno.getAlumnoCommand().unpressButton(matematicas, bruno); // Elimina certificado
 
         System.out.println("\n\n----------Ejercicio 3----------");
+        bruno.getAlumnoCommand().setCommand(inscribir);
+        bruno.getAlumnoCommand().pressButton(fisica, bruno);
+        CursoIterator it = bruno.iterator();
+        while (it.hasNext()) {
+            System.out.println(it.next().getNombre());  // asumiendo que Curso tiene getNombre()
+        }
+
+        System.out.println("\n\n----------Ejercicio 4----------");
+
 
     }
 }
