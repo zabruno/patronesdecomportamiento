@@ -1,6 +1,7 @@
 package Command;
 
 import Iterator.*;
+import Mediator.*;
 import lombok.*;
 
 import java.util.ArrayList;
@@ -12,7 +13,7 @@ import java.util.Set;
 @Setter
 @Getter
 //Invoker
-public class Alumno {
+public class Alumno extends Usuario {
     private int legajo;
     private String nombre;
     private List<Curso> cursos;
@@ -20,6 +21,7 @@ public class Alumno {
     private Set<String> certificados = new HashSet<>();
 
     public Alumno(int legajo,String nombre) {
+        super(nombre);
         this.legajo = legajo;
         this.nombre = nombre;
         this.cursos = new ArrayList<>();
@@ -40,6 +42,15 @@ public class Alumno {
     @Override
     public int hashCode() {
         return Integer.hashCode(legajo);
+    }
+    @Override
+    public void enviar(String mensaje) {
+        System.out.println(nombre+" envia: "+mensaje);
+        mediator.enviar(mensaje,this);
+    }
+    @Override
+    public void recibir (String mensaje) {
+        System.out.println(nombre+" recibe: "+mensaje);
     }
 
     public CursoIterator iterator(){

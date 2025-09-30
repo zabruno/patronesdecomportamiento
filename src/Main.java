@@ -1,9 +1,9 @@
 import ChainOfResp.*;
 import Command.*;
 import Iterator.*;
+import Mediator.*;
 
-import java.util.List;
-import java.util.Set;
+
 
 public class Main {
     public static void main(String[] args) {
@@ -57,7 +57,13 @@ public class Main {
         }
 
         System.out.println("\n\n----------Ejercicio 4----------");
-
+        ChatMediator sala = new ChatRoom();
+        ProfesorChat profesorChat = new ProfesorChat(sala,"Pablo");
+        bruno.setMediator(sala);
+        candela.setMediator(sala);
+        profesorChat.enviar("Hola!");
+        bruno.enviar("Hola profesor!");
+        candela.enviar("Buenas tardes!");
 
     }
 }
