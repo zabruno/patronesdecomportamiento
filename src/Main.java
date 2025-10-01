@@ -3,6 +3,7 @@ import Command.*;
 import Iterator.*;
 import Mediator.*;
 import Memento.*;
+import State.Inscripcion;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
@@ -93,5 +94,16 @@ public class Main {
         matematicas.aviso("Mañana examen :)");
         matematicas.removeObserver(candela);
         matematicas.cambioHorario(fecha);
+
+
+        System.out.println("\n\n----------Ejercicio 7----------");
+        Curso sistemas = new Curso("Sistemas");
+        Inscripcion inscripcion = new Inscripcion(bruno,sistemas);
+        inscripcion.inscribir();        // EnEspera -> Inscrito
+        inscripcion.cancelar();         // Inscrito -> Cancelado
+
+
+        System.out.println("\n\n----------Ejercicio 8----------");
+
     }
 }
