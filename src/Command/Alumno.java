@@ -2,6 +2,7 @@ package Command;
 
 import Iterator.*;
 import Mediator.*;
+import Memento.*;
 import lombok.*;
 
 import java.util.ArrayList;
@@ -19,6 +20,7 @@ public class Alumno extends Usuario {
     private List<Curso> cursos;
     private AlumnoCommand alumnoCommand;
     private Set<String> certificados = new HashSet<>();
+    private Examen examen;
 
     public Alumno(int legajo,String nombre) {
         super(nombre);

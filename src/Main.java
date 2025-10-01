@@ -2,6 +2,7 @@ import ChainOfResp.*;
 import Command.*;
 import Iterator.*;
 import Mediator.*;
+import Memento.*;
 
 
 
@@ -64,6 +65,25 @@ public class Main {
         profesorChat.enviar("Hola!");
         bruno.enviar("Hola profesor!");
         candela.enviar("Buenas tardes!");
+
+
+        System.out.println("\n\n----------Ejercicio 5----------");
+        Examen examenFisica = new Examen();
+        Historial hExamenFisica = new Historial();
+        examenFisica.setHistorial(hExamenFisica);
+        bruno.setExamen(examenFisica);
+        bruno.getExamen().respuesta("Respuesta corta");
+        bruno.getExamen().getHistorial().guardar(examenFisica.save());
+        System.out.println("La respuesta actual es: "+bruno.getExamen().getRespuesta());
+        bruno.getExamen().respuesta("Respuesta final");
+        bruno.getExamen().getHistorial().guardar(examenFisica.save());
+        System.out.println("La respuesta actual es: "+bruno.getExamen().getRespuesta());
+        bruno.getExamen().getHistorial().deshacer();
+        bruno.getExamen().restore(bruno.getExamen().getHistorial().deshacer());
+        System.out.println("La respuesta actual es: "+bruno.getExamen().getRespuesta());
+
+
+        System.out.println("\n\n----------Ejercicio 6----------");
 
     }
 }
