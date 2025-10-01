@@ -4,6 +4,8 @@ import Iterator.*;
 import Mediator.*;
 import Memento.*;
 
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
 
 public class Main {
@@ -84,6 +86,12 @@ public class Main {
 
 
         System.out.println("\n\n----------Ejercicio 6----------");
-
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
+        LocalDateTime fecha = LocalDateTime.parse("2025-09-30 22:30", formatter);
+        matematicas.addObserver(bruno); //Podria agregarse al ingresar al curso con el patron command / Agregar un command para unirse a la lista de observers
+        matematicas.addObserver(candela);
+        matematicas.aviso("Mañana examen :)");
+        matematicas.removeObserver(candela);
+        matematicas.cambioHorario(fecha);
     }
 }

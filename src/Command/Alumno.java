@@ -3,6 +3,7 @@ package Command;
 import Iterator.*;
 import Mediator.*;
 import Memento.*;
+import Observer.*;
 import lombok.*;
 
 import java.util.ArrayList;
@@ -14,7 +15,7 @@ import java.util.Set;
 @Setter
 @Getter
 //Invoker
-public class Alumno extends Usuario {
+public class Alumno extends Usuario implements Observer {
     private int legajo;
     private String nombre;
     private List<Curso> cursos;
@@ -57,6 +58,11 @@ public class Alumno extends Usuario {
 
     public CursoIterator iterator(){
         return new AlumnoIterator(cursos);
+    }
+
+    @Override
+    public void update(String mensaje) {
+        System.out.println(nombre+" fue notificad@: "+mensaje);
     }
 
     public static class AlumnoIterator implements CursoIterator {
